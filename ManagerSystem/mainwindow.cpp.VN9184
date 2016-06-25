@@ -1,0 +1,302 @@
+#include "mainwindow.h"
+#include "login.h"
+#include "ui_mainwindow.h"
+
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    Login *login_dlg = new Login;
+    login_dlg->setWindowFlags(Qt::FramelessWindowHint);
+    connect(login_dlg,SIGNAL(sendData(QString)),this,SLOT(receiveData(QString)));
+    login_dlg->exec();
+    //qDebug() << login_dlg->result();
+    if(login_dlg->result()==0)
+    {
+        QTimer::singleShot(0,qApp,SLOT(quit()));
+    }
+    setView();
+}
+
+void MainWindow::setView()
+{
+    timer = new QTimer();
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(showTime()));
+    timer->start(1000);
+    QImage* img=new QImage;
+    if(img->load("./src2.jpg"))
+    {
+        //qDebug()<<1;
+    }
+    else
+    {
+        //qDebug()<<0;
+    }
+    QImage* imgScaled = new QImage;
+    *imgScaled=img->scaled(151,171);
+    ui->img->setPixmap(QPixmap::fromImage(*imgScaled));
+    hide_item();
+}
+
+void MainWindow::hide_item()
+{
+    ui->money_save->setVisible(false);
+    ui->money_pull->setVisible(false);
+    ui->money_transname->setVisible(false);
+    ui->money_transmon->setVisible(false);
+    ui->search_result->setVisible(false);
+    ui->search_result->clearContents();
+    ui->money_transname->setText("");
+    ui->money_transmon->setText("");
+    ui->money_save->setText("");
+    ui->money_pull->setText("");
+}
+
+void MainWindow::showTime()
+{
+    QTime time = QTime::currentTime();
+    QDate qdateObj = QDate::currentDate();
+    QString text = qdateObj.toString("yyyy-M-d");
+    text += " ";
+    text += time.toString("hh:mm:ss");
+    ui->time->setText(text);
+}
+
+void MainWindow::receiveData(QString data)
+{
+    ui->label->setText(data);
+    username=data;
+    update_info();
+}
+
+void MainWindow::update_info()
+{
+    mysql sql;
+    vector <Person> tmp = sql.select_person(username);
+    ui->money->setText("￥"+QString::number(tmp[0].money,'f',2));
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+//窗口移动
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        mMoving = true;
+        mLastMousePosition = event->globalPos();
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+    if( event->buttons().testFlag(Qt::LeftButton) && mMoving)
+    {
+        this->move(this->pos() + (event->globalPos() - mLastMousePosition));
+        mLastMousePosition = event->globalPos();
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        mMoving = false;
+    }
+}
+
+void MainWindow::on_exit_clicked()
+{
+    QTimer::singleShot(0,qApp,SLOT(quit()));
+}
+
+void MainWindow::on_save_clicked()
+{
+    hide_item();
+    status = 1;
+    ui->money_save->setVisible(true);
+    ui->money_save->setFocus();
+    ui->money_save->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+    ui->save->setStyleSheet("color:#6bae40;");
+    ui->pull->setStyleSheet("color:white;");
+    ui->transfer->setStyleSheet("color:white;");
+    ui->inquiry->setStyleSheet("color:white;");
+}
+
+void MainWindow::on_pull_clicked()
+{
+    hide_item();
+    ui->money_pull->setVisible(true);
+    ui->money_pull->setFocus();
+    ui->money_pull->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+    status = 2;
+    ui->save->setStyleSheet("color:white;");
+    ui->pull->setStyleSheet("color:#6bae40;");
+    ui->transfer->setStyleSheet("color:white;");
+    ui->inquiry->setStyleSheet("color:white;");
+}
+
+void MainWindow::on_transfer_clicked()
+{
+    hide_item();
+    status = 3;
+    ui->money_transname->setVisible(true);
+    ui->money_transname->setFocus();
+    ui->money_transmon->setVisible(true);
+    ui->money_transmon->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+    ui->save->setStyleSheet("color:white;");
+    ui->pull->setStyleSheet("color:white;");
+    ui->transfer->setStyleSheet("color:#6bae40;");
+    ui->inquiry->setStyleSheet("color:white;");
+}
+
+void MainWindow::on_inquiry_clicked()
+{
+    hide_item();
+    status = 4;
+    ui->search_result->setVisible(true);
+    setTable();
+    ui->save->setStyleSheet("color:white;");
+    ui->pull->setStyleSheet("color:white;");
+    ui->transfer->setStyleSheet("color:white;");
+    ui->inquiry->setStyleSheet("color:#6bae40;");
+}
+
+void MainWindow::setTable()
+{
+    ui->search_result->setColumnWidth(0,80);
+    ui->search_result->setColumnWidth(1,80);
+    ui->search_result->setColumnWidth(2,80);
+    ui->search_result->setColumnWidth(3,80);
+    ui->search_result->setColumnWidth(4,80);
+    ui->search_result->setColumnWidth(5,205);
+    ui->search_result->setSelectionBehavior(QAbstractItemView::SelectRows);  //整行选中的方式
+    mysql sql;
+    vector <Record> tmp = sql.select_recordByto(username);
+    ui->search_result->setRowCount(tmp.size());
+    for(int i = 0;i<tmp.size();i++)
+    {
+        ui->search_result->setItem(i,0,new QTableWidgetItem(tmp[i].from_u));
+        ui->search_result->setItem(i,1,new QTableWidgetItem(tmp[i].to_u));
+        ui->search_result->setItem(i,2,new QTableWidgetItem(QString::number(tmp[i].money,'f',2)));
+        ui->search_result->setItem(i,3,new QTableWidgetItem(tmp[i].status));
+        ui->search_result->setItem(i,4,new QTableWidgetItem(tmp[i].type));
+        ui->search_result->setItem(i,5,new QTableWidgetItem(tmp[i].time));
+    }
+}
+
+void MainWindow::on_confirm_clicked()
+{
+    switch(status)
+    {
+        case 1:
+        {
+            mysql sql;
+            QDateTime current_date_time = QDateTime::currentDateTime();
+            QString time = current_date_time.toString("yyyy-MM-dd hh:mm:ss");
+            double money = ui->money_save->text().toDouble();
+            int res = sql.update_money(username, money);
+            Record tmp(username,username,money,res,1);
+            sql.insert_record(tmp);
+            if(res==1)
+            {
+                update_info();
+                ui->status->append("你存入￥"+ui->money_save->text()+" <span style='color:#6bae40;'>成功！</span> "+time);
+            }
+            else
+            {
+                ui->status->append("你存入￥"+ui->money_save->text()+" <span style='color:#CD0000;'>失败！</span>原因：系统故障 "+time);
+            }
+        }
+            break;
+        case 2:
+        {
+            mysql sql;
+            QDateTime current_date_time = QDateTime::currentDateTime();
+            QString time = current_date_time.toString("yyyy-MM-dd hh:mm:ss");
+            double money = ui->money_pull->text().toDouble();
+            int res = sql.update_money(username, -money);
+            Record tmp(username,username,-money,res,2);
+            sql.insert_record(tmp);
+            if(res==1)
+            {
+                update_info();
+                ui->status->append("你取出￥"+ui->money_pull->text()+" <span style='color:#6bae40;'>成功！</span> "+time);
+            }
+            else
+            {
+                if(res == 2)
+                {
+                    ui->status->append("你取出￥"+ui->money_pull->text()+" <span style='color:#CD0000;'>失败！</span>"
+                                                                     "原因：<span style='color:#CD0000;'>余额不足</span> "+time);
+                }
+                else
+                {
+                    ui->status->append("你取出￥"+ui->money_pull->text()+" <span style='color:#CD0000;'>失败！</span>"
+                                                                     "原因：<span style='color:#CD0000;'>系统故障</span> "+time);
+                }
+            }
+        }
+            break;
+        case 3:
+        {
+            mysql sql;
+            QDateTime current_date_time = QDateTime::currentDateTime();
+            QString time = current_date_time.toString("yyyy-MM-dd hh:mm:ss");
+            QString transname = ui->money_transname->text();
+            double money = ui->money_transmon->text().toDouble();
+            int res = sql.transfer_money(username,transname,money);
+            if(res == 1)
+            {
+                update_info();
+                ui->status->append("你向用户<span style='color:#6bae40;'>"+transname+"</span>转账￥"+ui->money_transmon->text()+" <span style='color:#6bae40;'>成功！</span> "+time);
+            }
+            if(res == 2)
+            {
+                update_info();
+                ui->status->append("你向用户<span style='color:#6bae40;'>"+transname+"</span>转账￥"+ui->money_transmon->text()+
+                                   " <span style='color:#CD0000;'>失败！</span>原因：<span style='color:#CD0000;'>余额不足！</span> "+time);
+            }
+            if(res == 3)
+            {
+                update_info();
+                ui->status->append("你向用户<span style='color:#6bae40;'>"+transname+"</span>转账￥"+ui->money_transmon->text()+
+                                   " <span style='color:#CD0000;'>失败！</span>原因：不存在此用户！ "+time);
+            }
+        }
+    }
+}
+
+void MainWindow::on_cancel_clicked()
+{
+    hide_item();
+    switch(status)
+    {
+        case 1:
+        {
+            ui->money_save->setVisible(true);
+            ui->money_save->setFocus();
+            ui->money_save->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+        }
+        break;
+        case 2:
+        {
+            ui->money_pull->setVisible(true);
+            ui->money_pull->setFocus();
+            ui->money_pull->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+        }
+        break;
+        case 3:
+        {
+            ui->money_transname->setVisible(true);
+            ui->money_transname->setFocus();
+            ui->money_transmon->setVisible(true);
+            ui->money_transmon->setValidator(new QDoubleValidator(0.00,INFINITY,2,this));
+        }
+        break;
+    }
+}

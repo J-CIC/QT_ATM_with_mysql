@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Microsoft YaHei UI</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">.QCommandLinkButton{
+color:white;
+}
+QLineEdit{
+background-color: rgba(0,0,0,0);
+border-width:0;
+border-bottom:1px;
+border-style:outset;
+}
+QTextBrowser{
+background-color: rgba(0,0,0,0);
+border:0;
+}
+QTableWidget{
+selection-background-color:#383838;
+alternate-background-color:#383838;
+show-decoration-selected:0;
+color:white;
+font: 11pt &quot;华文细黑&quot;;
+background-color: rgba(0,0,0,0);
+border-width:0;
+border-left:1px #6bae40 solid;
+border-style:outset;
+}
+QHeaderView::section{
+color:white;
+font: 11pt &quot;华文细黑&quot;;
+background-color: rgba(0,0,0,0);
+}
+QHeaderView{
+color:white;
+font: 11pt &quot;华文细黑&quot;;
+background-color: rgba(0,0,0,0);
+border:1px;
+}
+QScrollBar:vertical{
+background:#ffffff;
+width:5px;
+}
+QScrollBar::handle{
+background: gray;
+border:0px;
+border-radius:1px;
+}
+QScrollBar::handle:hover{
+background:gray;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#centralWidget{
+background-color:#383838;
+}</string>
+   </property>
+   <widget class="QCommandLinkButton" name="save">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>140</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>存款</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="pull">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>180</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>取款</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="transfer">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>220</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>转账</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="inquiry">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>260</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>查询</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>19</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label{
+color:#40E0D0;
+}</string>
+    </property>
+    <property name="text">
+     <string>Username</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="money">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>80</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#money{
+color:#6bae40;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>￥</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>151</width>
+      <height>591</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label_3{
+color:#6bae40;
+background-color:#343434;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="time">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#time{
+color:white;
+}</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="img">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>431</y>
+      <width>151</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>300</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#commandLinkButton_4{
+color:white;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>退出</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="money_save">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>140</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#money_save{
+color:#6bae40;
+}</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>存入金额</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="confirm">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>340</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;华文细黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Confirm</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src.qrc">
+      <normaloff>:/src/UI/tick .ico</normaloff>:/src/UI/tick .ico</iconset>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="cancel">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>390</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;华文细黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src.qrc">
+      <normaloff>:/src/UI/cancel_1.ico</normaloff>:/src/UI/cancel_1.ico</iconset>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="money_pull">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>180</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#money_pull{
+color:#6bae40;
+}</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>取出金额</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="status">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>431</y>
+      <width>751</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255)</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="money_transname">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>220</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#money_transname{
+color:#6bae40;
+}</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>转账账户名</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="money_transmon">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>220</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#money_transmon{
+color:#6bae40;
+}</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>转账金额</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="search_result">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>0</y>
+      <width>611</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="autoScrollMargin">
+     <number>10</number>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="tabKeyNavigation">
+     <bool>true</bool>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>true</bool>
+    </property>
+    <property name="dragDropOverwriteMode">
+     <bool>true</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::NoSelection</enum>
+    </property>
+    <column>
+     <property name="text">
+      <string notr="true">发起人</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>接收人</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>金额</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>状态</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>交易类型</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>交易时间</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QCommandLinkButton" name="my_record">
+    <property name="geometry">
+     <rect>
+      <x>761</x>
+      <y>0</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#my_record{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>发起的交易</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="recent_record">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>80</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#recent_record{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>5日交易记录</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="user_record">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>120</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#user_record{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>交易往来用户</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="tomy_record">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>40</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#tomy_record{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>接收的交易</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="day_record">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>160</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#day_record{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>指定日期查询</string>
+    </property>
+   </widget>
+   <widget class="QCalendarWidget" name="calendar">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>430</y>
+      <width>301</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="gridVisible">
+     <bool>true</bool>
+    </property>
+    <property name="verticalHeaderFormat">
+     <enum>QCalendarWidget::NoVerticalHeader</enum>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="amount">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>200</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#amount{
+font: 13pt &quot;华文细黑&quot;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>余额利息查询</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="mon_status">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>40</y>
+      <width>561</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文细黑</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255)</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'华文细黑'; font-size:20pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'SimSun'; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <zorder>label_3</zorder>
+   <zorder>save</zorder>
+   <zorder>pull</zorder>
+   <zorder>transfer</zorder>
+   <zorder>inquiry</zorder>
+   <zorder>label</zorder>
+   <zorder>money</zorder>
+   <zorder>time</zorder>
+   <zorder>img</zorder>
+   <zorder>exit</zorder>
+   <zorder>money_save</zorder>
+   <zorder>confirm</zorder>
+   <zorder>cancel</zorder>
+   <zorder>money_pull</zorder>
+   <zorder>status</zorder>
+   <zorder>money_transname</zorder>
+   <zorder>money_transmon</zorder>
+   <zorder>search_result</zorder>
+   <zorder>my_record</zorder>
+   <zorder>recent_record</zorder>
+   <zorder>user_record</zorder>
+   <zorder>tomy_record</zorder>
+   <zorder>day_record</zorder>
+   <zorder>calendar</zorder>
+   <zorder>amount</zorder>
+   <zorder>mon_status</zorder>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="src.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/src">
+        <file>UI/src2.jpg</file>
+        <file>UI/tick .ico</file>
+        <file>UI/cancel_1.ico</file>
+        <file>UI/login.png</file>
+    </qresource>
+</RCC>
