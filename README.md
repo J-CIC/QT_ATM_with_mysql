@@ -1,5 +1,3 @@
-<div id='toc'>
-</div>
 # QT_ATM_with_mysql
 ### EASY ATM SYSTEM
 
@@ -51,4 +49,3 @@
 > 在交易往来用户选项中，可以双击用户查看详细记录
 
 ![截图](/ScreenShots/截图19.png)
-<script src="http://jfamily.me/md-toc.js"></script>
